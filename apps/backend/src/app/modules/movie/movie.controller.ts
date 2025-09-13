@@ -9,7 +9,7 @@ export class MovieController {
   @Get()
   find(
     @Query('query') query: string,
-    @Query('page', ParseIntPipe, PositiveIntPipe) page: string
+    @Query('page', ParseIntPipe, PositiveIntPipe) page: number
   ) {
     // this is tricky, tmdb api cannot handle empty query param, so we choose another endpoint. popular movies are attractive
     if (query) {
