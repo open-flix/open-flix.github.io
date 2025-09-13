@@ -76,15 +76,15 @@
     "@nx/react": {
       "application": {
         "babel": true,
-        "style": "styled-components",
+        "style": "emotion",
         "linter": "eslint",
         "bundler": "vite"
       },
       "component": {
-        "style": "styled-components"
+        "style": "emotion"
       },
       "library": {
-        "style": "styled-components",
+        "style": "emotion",
         "linter": "eslint"
       }
     }

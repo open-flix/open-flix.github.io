@@ -27,6 +27,11 @@ export default [
           ],
         },
       ],
+      'padding-line-between-statements': [
+        'error',
+        { blankLine: 'always', prev: 'import', next: 'function' },
+        { blankLine: 'always', prev: 'import', next: 'block' },
+      ],
     },
   },
   {
