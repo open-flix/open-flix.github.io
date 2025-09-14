@@ -1,17 +1,16 @@
-import styled from '@emotion/styled';
+import { Provider } from 'react-redux';
 import { Header } from '../components/header';
-import NxWelcome from './nx-welcome';
-
-const StyledApp = styled.div`
-  // Your style here
-`;
+import { MovieGrid } from '../features/movie/components/movie-grid';
+import { store } from '../store/store';
 
 export function App() {
   return (
-    <StyledApp>
+    <Provider store={store}>
       <Header />
-      <NxWelcome title="@open-flix/frontend" />
-    </StyledApp>
+      <main>
+        <MovieGrid />
+      </main>
+    </Provider>
   );
 }
 

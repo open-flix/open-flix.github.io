@@ -65,10 +65,12 @@
     "@nestjs/common": "^11.0.0",
     "@nestjs/core": "^11.0.0",
     "@nestjs/platform-express": "^11.0.0",
+    "@reduxjs/toolkit": "^2.9.0",
     "axios": "^1.12.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-is": "19.0.0",
+    "react-redux": "^9.2.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0"
   }
