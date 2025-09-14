@@ -8,8 +8,8 @@
     "be": "nx serve backend",
     "build:fe": "nx build frontend",
     "build:be": "nx build backend",
-    "predeploy:fe": "npm run build:fe",
-    "deploy:fe": "gh-pages -d apps/frontend/dist",
+    "predeploy": "npm run build:fe",
+    "deploy": "gh-pages -d apps/frontend/dist",
     "lint": "nx run-many --target=lint --all --fix",
     "prettier": "nx format:write"
   },
