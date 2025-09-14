@@ -1,19 +1,47 @@
-import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import { Movie } from '@open-flix/shared';
-import { forwardRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { VirtuosoGrid } from 'react-virtuoso';
 import { useGetMoviesByTitleQuery } from '../services/movie.api';
 import { MovieItem } from './movie-Item';
 
-import { VirtuosoGrid } from 'react-virtuoso';
+const Grid = styled('div')({
+  height: 'calc(100vh - 70px)',
+  width: '100%',
+  position: 'relative',
+  overflow: 'hidden',
+  '.movie-grid-list': {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: '1rem',
+    marginTop: '1rem',
+    // overflow: 'auto',
+  },
+  '.movie-grid-item': {
+    display: 'flex',
+    flex: 'none',
+    alignContent: 'stretch',
+    boxSizing: 'border-box',
+  },
+});
+
 export const MovieGrid = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('title') || '';
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [hasMore, setHasMore] = useState(true);
+  useEffect(() => {
+    setPage(1);
+    setMovies([]);
+  }, [query]);
+
   const { data, error, isLoading } = useGetMoviesByTitleQuery({
-    title: 'batman',
+    title: query,
     page: page.toString(),
   });
-  console.log(data, error, isLoading);
 
   useEffect(() => {
     if (data) {
@@ -27,52 +55,18 @@ export const MovieGrid = () => {
       setPage((prev) => prev + 1);
     }
   };
+
   return (
-    <Box
-      sx={{
-        height: 'calc(100vh - 70px)',
-        width: '100%',
-        position: 'relative',
-        overflow: 'hidden',
-        paddingTop: '6px',
-      }}
-    >
+    <Grid>
       <VirtuosoGrid
         data={movies}
         style={{ height: '100%', width: 'auto', position: 'relative' }}
+        listClassName="movie-grid-list"
+        itemClassName="movie-grid-item"
         endReached={() => {
           if (hasMore) loadMore();
         }}
         components={{
-          List: forwardRef(({ style, children, ...props }: any, ref) => (
-            <div
-              ref={ref}
-              {...props}
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'center',
-                overflow: 'auto',
-                ...style,
-              }}
-            >
-              {children}
-            </div>
-          )),
-          Item: ({ children, ...props }: any) => (
-            <div
-              {...props}
-              style={{
-                padding: '0.5rem',
-                display: 'flex',
-                flex: 'none',
-                alignContent: 'stretch',
-                boxSizing: 'border-box',
-              }}
-            >
-              {children}
-            </div>
-          ),
           Footer: () =>
             hasMore ? (
               <div style={{ textAlign: 'center', padding: 16 }}>Loading...</div>
@@ -86,6 +80,6 @@ export const MovieGrid = () => {
           <MovieItem movie={movie} />
         )}
       />
-    </Box>
+    </Grid>
   );
 };

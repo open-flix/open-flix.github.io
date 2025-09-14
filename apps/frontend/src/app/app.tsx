@@ -1,16 +1,17 @@
-import { Provider } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
 import { Header } from '../components/header';
 import { MovieGrid } from '../features/movie/components/movie-grid';
-import { store } from '../store/store';
 
 export function App() {
   return (
-    <Provider store={store}>
+    <>
       <Header />
       <main>
-        <MovieGrid />
+        <Routes>
+          <Route path="/" element={<MovieGrid />} />
+        </Routes>
       </main>
-    </Provider>
+    </>
   );
 }
 

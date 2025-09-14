@@ -1,8 +1,9 @@
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { alpha, styled } from '@mui/material/styles';
+import { useSearchParams } from 'react-router-dom';
 
-const Wrapper = styled('div')(({ theme }) => ({
+const Wrapper = styled('form')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -44,14 +45,25 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export const Search = () => (
-  <Wrapper>
-    <SearchIconWrapper>
-      <SearchIcon />
-    </SearchIconWrapper>
-    <StyledInputBase
-      placeholder="Search…"
-      inputProps={{ 'aria-label': 'search' }}
-    />
-  </Wrapper>
-);
+export const Search = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const value = formData.get('title');
+    console.log(value);
+    setSearchParams(value ? { title: value.toString() } : {});
+  };
+  return (
+    <Wrapper onSubmit={handleSubmit}>
+      <SearchIconWrapper>
+        <SearchIcon />
+      </SearchIconWrapper>
+      <StyledInputBase
+        placeholder="Search…"
+        inputProps={{ 'aria-label': 'search' }}
+        name="title"
+      />
+    </Wrapper>
+  );
+};
