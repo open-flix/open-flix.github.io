@@ -2,7 +2,7 @@
   "name": "@open-flix/source",
   "version": "0.0.0",
   "license": "MIT",
-  "homepage": "https://open-flix.github.io/open-flix.github.io/",
+  "homepage": "https://open-flix.github.io/open-flix",
   "scripts": {
     "fe": "nx serve frontend",
     "be": "nx serve backend",
