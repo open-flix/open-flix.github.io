@@ -6,8 +6,12 @@
   "scripts": {
     "fe": "nx serve frontend",
     "be": "nx serve backend",
-    "predeploy": "nx build frontend",
-    "deploy": "gh-pages -d apps/frontend/dist"
+    "build:fe": "nx build frontend",
+    "build:be": "nx build backend",
+    "predeploy:fe": "npm run build:fe",
+    "deploy:fe": "gh-pages -d apps/frontend/dist",
+    "lint": "nx run-many --target=lint --all --fix",
+    "prettier": "nx format:write"
   },
   "private": true,
   "devDependencies": {

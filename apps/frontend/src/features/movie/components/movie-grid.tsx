@@ -1,11 +1,13 @@
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import { Movie } from '@open-flix/shared';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { InfiniteGrid } from '../../../components/infinit-grid';
 import { useGetMoviesByTitleQuery } from '../services/movie.api';
 import { MovieItem } from './movie-Item';
-
 const Grid = styled('div')({
   height: 'calc(100vh - 70px)',
   width: '100%',
@@ -44,8 +46,22 @@ export const MovieGrid = () => {
 
   return (
     <Grid>
-      {isError && <div>Error loading movies.</div>}
-      {isLoading && movies.length === 0 && <div>First loading...</div>}
+      {isError && (
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            mt: 4,
+          }}
+        >
+          <WarningAmberIcon sx={{ fontSize: '40vw' }} color="error" />
+          <Typography color="error">
+            could not fetch movies, please try again later.
+          </Typography>
+        </Box>
+      )}
+
       {!isError && (
         <InfiniteGrid
           data={movies}

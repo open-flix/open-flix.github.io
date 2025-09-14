@@ -49,6 +49,7 @@ export function InfiniteGrid<T>({
                 display: 'flex',
                 width: '100%',
                 justifyContent: 'center',
+                alignItems: 'center',
                 height: '4rem',
                 overflow: 'hidden',
               }}

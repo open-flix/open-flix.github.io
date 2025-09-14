@@ -33,7 +33,7 @@ export const MovieDetails = () => {
         <em> HashBang (#)</em> or <code>HashRoute</code> work on github pages.
         <br />
         Github pages would not allow client side routing, by using the hashbang
-        we tackle this problem. and this page is all out that
+        we tackle this problem. Hence, this page is all about that
         <br />
         To be honest, it created more problems than it solved, but hey, it
         works.

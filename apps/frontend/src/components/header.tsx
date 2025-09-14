@@ -1,4 +1,4 @@
-import AdbIcon from '@mui/icons-material/Adb';
+import LiveTvIcon from '@mui/icons-material/LiveTv';
 import AppBar from '@mui/material/AppBar';
 import Link from '@mui/material/Link';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,15 +8,15 @@ import { Search } from './search';
 export const Header = () => {
   return (
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
         <Link
           component="a"
           href="/"
           underline="none"
           color="primary.contrastText"
-          style={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}
+          style={{ display: 'flex', alignItems: 'center' }}
         >
-          <AdbIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
+          <LiveTvIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap

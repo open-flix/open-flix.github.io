@@ -5,7 +5,6 @@ import { movieApi } from '../features/movie/services/movie.api';
 export const store = configureStore({
   reducer: {
     [movieApi.reducerPath]: movieApi.reducer,
-    // add other reducers here
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(movieApi.middleware),
