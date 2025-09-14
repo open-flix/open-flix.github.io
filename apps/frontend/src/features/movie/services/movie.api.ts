@@ -2,7 +2,14 @@ import { MovieResponse } from '@open-flix/shared';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const movieApi = createApi({
   reducerPath: 'movieApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/movie' }),
+  baseQuery: fetchBaseQuery({
+    // TODO: dont forget about environment variables later
+    // few moments later, i still forgot :D but i forgave myself!
+    baseUrl:
+      process.env.NODE_ENV === 'production'
+        ? 'https://open-flixbackend-production.up.railway.app/api/movie'
+        : 'http://localhost:3000/api/movie',
+  }),
   endpoints: (builder) => ({
     getMoviesByTitle: builder.query<
       MovieResponse,
@@ -14,7 +21,6 @@ export const movieApi = createApi({
       }),
       keepUnusedDataFor: 0,
       providesTags: [],
-      extraOptions: { throttle: 3000 },
     }),
   }),
 });

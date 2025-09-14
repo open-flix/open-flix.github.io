@@ -1,7 +1,7 @@
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { alpha, styled } from '@mui/material/styles';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const Wrapper = styled('form')(({ theme }) => ({
   position: 'relative',
@@ -47,12 +47,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const value = formData.get('title');
-    console.log(value);
-    setSearchParams(value ? { title: value.toString() } : {});
+    const value = formData.get('title') || '';
+    //TODO: come back when hashbang is removed
+    navigate(`/?title=${value}`);
   };
   return (
     <Wrapper onSubmit={handleSubmit}>

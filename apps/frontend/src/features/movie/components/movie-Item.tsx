@@ -60,9 +60,17 @@ export const MovieItem = ({ movie }: MovieItemProps) => {
         ></ThumbnailImage>
 
         <Overlay>
-          <PlayArrow />
-          <Typography component={'h5'}>{movie.title}</Typography>
+          <PlayArrow
+            style={{
+              fontSize: 90,
+              margin: '0 auto',
+              color: 'color.accent',
+              flexGrow: 1,
+            }}
+          />
+
           <Rating
+            sx={{ position: 'absolute', bottom: 10, left: 10 }}
             name="read-only"
             value={movie.vote_average / 2}
             readOnly

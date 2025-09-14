@@ -1,6 +1,6 @@
 import AdbIcon from '@mui/icons-material/Adb';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Search } from './search';
@@ -9,7 +9,13 @@ export const Header = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Box style={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+        <Link
+          component="a"
+          href="/"
+          underline="none"
+          color="primary.contrastText"
+          style={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}
+        >
           <AdbIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
@@ -26,7 +32,7 @@ export const Header = () => {
           >
             OpenFlix
           </Typography>
-        </Box>
+        </Link>
         <Search />
       </Toolbar>
     </AppBar>
