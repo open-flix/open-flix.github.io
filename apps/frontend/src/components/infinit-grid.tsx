@@ -49,9 +49,11 @@ export function InfiniteGrid<T>({
                 display: 'flex',
                 width: '100%',
                 justifyContent: 'center',
+                height: '4rem',
+                overflow: 'hidden',
               }}
             >
-              <CircularProgress size="4rem" color="secondary" />
+              <CircularProgress size="3rem" color="primary" />
             </Box>
           ),
       }}

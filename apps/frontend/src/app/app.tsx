@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { Header } from '../components/header';
-import { MovieGrid } from '../features/movie/components/movie-grid';
+import { MovieDetailsPage } from '../pages/movie.page';
+import { MoviesPage } from '../pages/movies.page';
 
 export function App() {
   return (
@@ -8,7 +9,8 @@ export function App() {
       <Header />
       <main>
         <Routes>
-          <Route path="/" element={<MovieGrid />} />
+          <Route path="/" element={<MoviesPage />} />
+          <Route path="/:id" element={<MovieDetailsPage />} />
         </Routes>
       </main>
     </>
