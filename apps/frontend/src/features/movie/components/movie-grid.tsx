@@ -55,7 +55,7 @@ export const MovieGrid = () => {
             mt: 4,
           }}
         >
-          <WarningAmberIcon sx={{ fontSize: '40vw' }} color="error" />
+          <WarningAmberIcon sx={{ fontSize: '50vh' }} color="error" />
           <Typography color="error">
             could not fetch movies, please try again later.
           </Typography>
