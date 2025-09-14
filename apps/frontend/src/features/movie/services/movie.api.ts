@@ -14,6 +14,7 @@ export const movieApi = createApi({
       }),
       keepUnusedDataFor: 0,
       providesTags: [],
+      extraOptions: { throttle: 3000 },
     }),
   }),
 });

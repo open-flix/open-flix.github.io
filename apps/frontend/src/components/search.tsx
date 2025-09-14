@@ -63,6 +63,7 @@ export const Search = () => {
         placeholder="Search…"
         inputProps={{ 'aria-label': 'search' }}
         name="title"
+        defaultValue={searchParams.get('title') || ''}
       />
     </Wrapper>
   );

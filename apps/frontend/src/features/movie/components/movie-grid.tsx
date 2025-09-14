@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import { Movie } from '@open-flix/shared';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { VirtuosoGrid } from 'react-virtuoso';
+import { InfiniteGrid } from '../../../components/infinit-grid';
 import { useGetMoviesByTitleQuery } from '../services/movie.api';
 import { MovieItem } from './movie-Item';
 
@@ -11,24 +11,10 @@ const Grid = styled('div')({
   width: '100%',
   position: 'relative',
   overflow: 'hidden',
-  '.movie-grid-list': {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: '1rem',
-    marginTop: '1rem',
-    // overflow: 'auto',
-  },
-  '.movie-grid-item': {
-    display: 'flex',
-    flex: 'none',
-    alignContent: 'stretch',
-    boxSizing: 'border-box',
-  },
 });
 
 export const MovieGrid = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const query = searchParams.get('title') || '';
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -38,7 +24,7 @@ export const MovieGrid = () => {
     setMovies([]);
   }, [query]);
 
-  const { data, error, isLoading } = useGetMoviesByTitleQuery({
+  const { data, isError, isLoading } = useGetMoviesByTitleQuery({
     title: query,
     page: page.toString(),
   });
@@ -58,28 +44,21 @@ export const MovieGrid = () => {
 
   return (
     <Grid>
-      <VirtuosoGrid
-        data={movies}
-        style={{ height: '100%', width: 'auto', position: 'relative' }}
-        listClassName="movie-grid-list"
-        itemClassName="movie-grid-item"
-        endReached={() => {
-          if (hasMore) loadMore();
-        }}
-        components={{
-          Footer: () =>
-            hasMore ? (
-              <div style={{ textAlign: 'center', padding: 16 }}>Loading...</div>
-            ) : (
-              <div style={{ textAlign: 'center', padding: 16 }}>
-                No more movies
-              </div>
-            ),
-        }}
-        itemContent={(index: number, movie: Movie) => (
-          <MovieItem movie={movie} />
-        )}
-      />
+      {isError && <div>Error loading movies.</div>}
+      {isLoading && movies.length === 0 && <div>First loading...</div>}
+      {!isError && (
+        <InfiniteGrid
+          data={movies}
+          hasMore={hasMore}
+          isLoading={isLoading}
+          endReached={() => {
+            if (hasMore && !isLoading) loadMore();
+          }}
+          itemContent={(index: number, movie: Movie) => (
+            <MovieItem movie={movie} />
+          )}
+        />
+      )}
     </Grid>
   );
 };
