@@ -3,7 +3,7 @@ import StarIcon from '@mui/icons-material/Star';
 import Paper from '@mui/material/Paper';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/system';
+import { Box, styled } from '@mui/system';
 import { Movie } from '@open-flix/shared'; // Adjust the import path as needed
 import { Link } from 'react-router-dom';
 const Title = styled(Typography)({
@@ -69,16 +69,20 @@ export const MovieItem = ({ movie }: MovieItemProps) => {
             }}
           />
 
-          <Rating
-            sx={{ position: 'absolute', bottom: 10, left: 10 }}
-            name="read-only"
-            value={movie.vote_average / 2}
-            readOnly
-            precision={0.5}
-            emptyIcon={
-              <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-            }
-          />
+          <Box sx={{ position: 'absolute', bottom: 10, left: 10 }}>
+            <Typography variant="body2" color="inherit">
+              {movie.title}
+            </Typography>
+            <Rating
+              name="read-only"
+              value={movie.vote_average / 2}
+              readOnly
+              precision={0.5}
+              emptyIcon={
+                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+              }
+            />
+          </Box>
         </Overlay>
       </Thumbnail>
     </Link>
